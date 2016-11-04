@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:it.mail.ru
+METHOD:request
+X-MS-OLK-FORCEINSPECTOROPEN:true
+BEGIN:VEVENT
+SUMMARY:Путь от «Hello\, World!» до высоконагружен
+ ных систем
+DTSTART;VALUE=DATE-TIME:20160519T160000Z
+DTEND;VALUE=DATE-TIME:20160519T180000Z
+DTSTAMP;VALUE=DATE-TIME:20160516T174141Z
+UID:announcement_37@it.mail.ru
+ATTENDEE;CN="Иван Аткнин";ROLE=NON-PARTICIPANT;RSVP=1:mailto:atk
+ nini@yahoo.com
+DESCRIPTION:Присоединяйтесь к онлайн мастер-к
+ лассу на канале Технострим\, на котором в
+ ыступит Дмитрий Архангельский\, разрабо
+ тчик с опытом работы в Parallels\, Deutsche Bank и Од
+ ноклассниках.
+END:VEVENT
+END:VCALENDAR

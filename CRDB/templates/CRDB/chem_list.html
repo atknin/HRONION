@@ -1,0 +1,15 @@
+{% extends 'CRDB/index.html' %}
+
+{% block content %}
+	 	
+	 	<div class="row">
+	 		{% for element in all_chem %}
+		  <div class="col-xs-12 col-sm-6 col-md-3"><a href="{% url 'chem_detail' element.number%}">{{element.name}}</div>
+		  {% endfor %}
+		</div>
+	 	<div>
+	 		
+	 	</div>
+
+	 	
+{% endblock %}

@@ -1,0 +1,38 @@
+#coding=utf-8
+
+import sys, os, django
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'myproject.settings'
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CRDB.settings")
+django.setup()
+from CRDB.models import Crystal, articles_about,file_converter
+import random 
+from datetime import date,timedelta
+
+path = os.path.realpath(os.path.dirname(sys.argv[0]))+'/scripts/'
+
+f = file_converter.objects.filter(project=1).order_by('-id')[:100]
+
+with open(path+'Piezo_30.dat', 'w') as out:
+	for i in range(len(f)):
+		if f[i].id >=356:
+			time_from_stert = f[i].time - file_converter.objects.get(id = 356).time
+			out.write('%14.8f' % time_from_stert.total_seconds())
+			out.write(' %14.8f' % float(f[i].center_2))
+			out.write(' %14.8f' % float(f[i].half_width_2))
+			out.write(' %14.8f' % float(f[i].max2))
+			out.write(' %14.8f' % float(f[i].id))
+			out.write(' %14.8f' % float(f[i].temperature))
+			out.write('\n')
+
+# with open(path+'Piezo_temp.dat', 'w') as out:
+# 	for i in range(263,295+1):
+# 		f = file_converter.objects.get(id = i)
+# 		time_from_stert = f.time - file_converter.objects.get(id = 263).time
+
+# 		out.write('%14.8f' % time_from_stert.total_seconds())
+# 		out.write(' %14.8f' % float(f.center_2))
+# 		out.write(' %14.8f' % float(f.half_width_2))
+# 		out.write(' %14.8f' % float(f.max2))
+# 		out.write('\n')
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <script type="text/javascript" language="javascript" src="{% static "CRDB/js/jquery.min.js" %}" ></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/CRDB/img/icon.ico">
+    <title>{% block web_title %}[PHYSO]{% endblock %}</title>
+    <link href="{% static "CRDB/css/bootstrap.css" %}" rel="stylesheet">
+    <script src="{% static "CRDB/js/bootstrap.js"%}"></script>
+    <script type="text/javascript" src=" {% static "CRDB/js/bootstrap-filestyle.js" %}"> </script>
+    <link href="{% static "CRDB/css/sweetalert.css" %}" rel="stylesheet">
+    <link href="{% static "CRDB/css/cover.css" %}" rel="stylesheet">
+    <script src="{% static "CRDB/js/sweetalert.min.js"%}"></script>
+    <script src="{% static "CRDB/js/pdfobject.js"%}"></script>
+   
+
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Cover</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                
+                  <li>
+                    <form class="form-inline" method="post">
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" name="login" placeholder="Email">
+                      </div>
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputPassword3">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password" name="password">
+                      </div>
+                      <button type="submit" class="btn btn-default">Sign in</button>
+                    </form>
+                  </li>
+                 
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+              <a href="/startup/login/" class="btn btn-lg btn-default">Login</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+</html>

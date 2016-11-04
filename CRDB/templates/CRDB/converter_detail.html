@@ -1,0 +1,36 @@
+{% extends 'CRDB/index.html' %}
+
+
+{% block web_title %}[rocking curves]{% endblock %}
+{% block name_of %}Вот такие кривые{% endblock %}
+
+{% block content %}
+	<div>
+		Полуширина с 1: {{converter_d.half_width_1}}
+	</div>
+	
+	<div>
+		
+		<img src="{{ converter_d.converter_result.url }}"  height="420" />
+	 	
+	</div>
+	<div>
+		
+		{{converter_d.Voigt_model_report_1}}
+	 	
+	</div>
+	<div>
+	 	Полуширина с 2: {{converter_d.half_width_2}}
+	</div>
+	<div>
+		
+		<img src="{{ converter_d.converter_result_2.url }}"  height="420" />
+	 	
+	</div>
+
+	<div>
+		
+		{{converter_d.Voigt_model_report_2}}
+	 	
+	</div>
+{% endblock %}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <title>[FAMILY]</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "CRDB/css/bootstrap.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "CRDB/css/soon.css"%}" rel="stylesheet">
+
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+  </head>
+  <!-- START BODY -->
+  <body class="nomobile">
+
+    <!-- START HEADER -->
+    <section id="header">
+        <div class="container">
+            <header>
+                <!-- HEADLINE -->
+                <h1 data-animated="GoIn"><b>ЛЮБИМАЯ</b> ты мое счастье...</h1>
+            </header>
+            <!-- START TIMER -->
+            <div id="timer" data-animated="FadeIn">
+                <p id="message"></p>
+                <div id="days" class="timer_box"></div>
+                <div id="hours" class="timer_box"></div>
+                <div id="minutes" class="timer_box"></div>
+                <div id="seconds" class="timer_box"></div>
+            </div>
+            <!-- END TIMER -->
+            <div class="col-lg-10 col-lg-offset-1 mt justify">
+                <h4>ДОБРОЕ УТРО, МОЯ МИЛАЯ, САМАЯ ДРАГОЦЕННАЯ И ЕДИНСТВЕННАЯ НЕВЕСТОЧКА НА ВСЕ БЕЛОМ СВЕТЕ – НА ВСЮ ЖИЗНЬ.
+                <h5  style="color:White" > 
+                    <p>РОВНО ЧЕРЕЗ МЕСЯЦ СБУДЕТСЯ НАША С ТОБОЙ ЗАВЕТНАЯ МЕЧТА. ЭТО НЕВЕРОЯТНО, Я ВЫРОС И У МЕНЯ ТЕПЕРЬ СВОЯ
+                    – НАСТОЯЩАЯ САМАЯ КРЕПКАЯ СЕМЬЯ. Я ТЕБЯ ОЧЕНЬ ЛЮБЛЮ. И ЕСЛИ ГДЕ - ТО Я НЕМНОГО ЗЛЮСЬ, ПРОШУ У ТЕБЯ ПРОЩЕНИЯ. КАЖДЫЙ ДЕНЬ ХОЧУ ВИДЕТ НАШЕ С ТОБОЙ РАЗВИТИЕ, ДВИЖЕНИЕ ВПЕРЕД. </p>
+                    <p>ТВОЯ ОБВОРОЖИТЕЛЬНАЯ КРАСОТА, ТВОЯ СМЕКАЛКА, ТВОЙ УМ. <sup>И ПОПА ПОПА правда самая красивая, она вне конкуренции</sup> 
+                    КАЖДОЕ ТВОЕ КАЧЕСТВО – ЭТО МОЯ ГОРДОСТЬ, МОЙ УЮТНЫЙ МИР В КОТОРОМ МНЕ ПРЕДСТОИТ ПРОЖИТЬ ВСЮ СВОЮ СЧАСТЛИВУЮ ЖИНЬ. ПОТОМУ ЧТО ТЫ - ПОЭТОМУ СЧАСТЛИВУЮ.</p>
+                    <p>Да, МЫ теперь мы снова запускаем нашу с тобой страничку и будем развивать ее вместе, можешь практиковать здесь HTML|CSS|JAVASCRIP ой ой, самое главное: </p>
+                    <p>я тебя люблю, ты согласна выйти за меня замуж???</p></h5></h4>
+                <form class="form-inline" role="form">
+                
+
+                 <button  type="submit" class="btn btn-success" onClick="alert('Я Тебя Люблю, спасибо')">Да</button>
+
+                 <SPAN id="button1" style="position:relative;z-index:3" onmouseOver="moveIt()" onfocus="moveIt();this.blur()">
+                    <button type="submit" class="btn btn-danger" onClick="alert('Все таки поймала, по жопе тебе')" >Нет</button>
+                 </SPAN>
+                     <center>
+
+                            <script> 
+                            function getObj(objID)
+                            {
+                                if (document.getElementById) {return document.getElementById(objID);}
+                                else if (document.all) {return document.all[objID];}
+                                else if (document.layers) {return document.layers[objID];}
+                            }
+                             
+                            var ie4=document.all
+                            var ns6=document.getElementById&&!document.all
+                            cobj=getObj("button1");
+                             
+                            function moveIt(){
+                            y=Math.floor(Math.random()*301);
+                            x=Math.floor(Math.random()*401);
+                            if (ie4){
+                                cobj.style.top  = y;
+                                cobj.style.left = x;
+                                }
+                            else if (ns6){
+                                cobj.style.top  = y+"px";
+                                cobj.style.left = x+"px";
+                                }
+                            }
+                            </script>
+                    </center>
+
+               
+                </form>            
+            </div>
+           
+        </div>
+        <!-- LAYER OVER THE SLIDER TO MAKE THE WHITE TEXTE READABLE -->
+        <div id="layer"></div>
+        <!-- END LAYER -->
+        <!-- START SLIDER -->
+        <div id="slider" class="rev_slider">
+            <ul>
+              <li data-transition="slideleft" data-slotamount="1" data-thumb="{% static "CRDB/img/slider/2.jpg" %}">
+                <img src="{% static "CRDB/img/slider/3.jpg" %}">
+            </ul>
+        </div>
+        <!-- END SLIDER -->
+    </section>
+    <!-- END HEADER -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "CRDB/js/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "CRDB/js/modernizr.custom.js" %}"></script>
+    <script src="{% static "CRDB/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "CRDB/js/soon/plugins.js" %}"></script>
+    <script src="{% static "CRDB/js/soon/jquery.themepunch.revolution.min.js" %}"></script>
+    <script src="{% static "CRDB/js/soon/custom.js"%}"></script>
+  </body>
+  <!-- END BODY -->
+</html>

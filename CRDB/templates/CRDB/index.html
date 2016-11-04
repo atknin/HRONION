@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	{% load static %}
+  	{% block extra_head %}{% endblock %}
+    <script type="text/javascript" language="javascript" src="{% static "CRDB/js/jquery.min.js" %}" ></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/CRDB/img/icon.ico">
+    <title>{% block web_title %}[PHYSO]{% endblock %}</title>
+    <link href="{% static "CRDB/css/bootstrap.css" %}" rel="stylesheet">
+    <script src="{% static "CRDB/js/bootstrap.js"%}"></script>
+    <script type="text/javascript" src=" {% static "CRDB/js/bootstrap-filestyle.js" %}"> </script>
+    <link href="{% static "CRDB/css/sweetalert.css" %}" rel="stylesheet">
+    <script src="{% static "CRDB/js/sweetalert.min.js"%}"></script>
+    <script src="{% static "CRDB/js/pdfobject.js"%}"></script>
+   
+    
+    <style>
+    .pdfobject-container { height: 500px;}
+    .pdfobject { border: 1px solid #666; }
+    </style>
+
+    <style>
+    body {
+        padding-top: 60px;     
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top ">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="http://atknin.ru/">.ru</sub></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Приложения<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://atknin.ru/converter/">CNVRT - конвертер</a></li>
+                <li><a href="http://atknin.ru/forbidden/">Поиск запрещенных рефлексов</a></li>
+                <li><a href="http://atknin.ru/article_list/">[articles]</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">раздел</li>
+                <li><a href="http://atknin.ru/references/">Литература</a></li>
+                <li><a href="http://getbootstrap.com/examples/navbar-fixed-top/#">One more separated link</a></li>
+              </ul>
+            </li>
+
+          </ul>
+          {% block head_but %}        {% endblock %}
+          {% if user.is_authenticated %}
+          <p class="navbar-text navbar-right">Hi, <a href="/accounts/profile/" class="navbar-link"><b>{{ user.first_name }}</b></a></p>
+          {% else %}
+          <form class="navbar-form navbar-right" method="post" action="/login/">
+            {% csrf_token %}
+            <div class="form-group">
+
+               <label for="username" class="sr-only" >username</label>
+               <input type="text" name="username" class="form-control" value="" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputPassword3">Password</label>
+              <input type="password" class="form-control"  id="id_password" name="password"  placeholder="Password">
+            </div>
+            <div class="checkbox">
+            </div>
+            <button type="submit" class="btn btn-default">Sign in</button>
+          </form>
+          {% endif %}
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row" style="height: 550px;">
+                <h1>{% block name_of %}{% endblock %}</h1>
+                <div class="col-md-12">
+                  {% block content %}
+                       
+                      <a class="btn btn-primary btn-lg" href="http://atknin.ru/converter/">
+                        <span class="glyphicon glyphicon-dashboard pull-left" style="font-size:xx-large;margin:5px;"></span> 
+                          CNVRT<br>
+                          <small>конвертор</small>
+                      </a>
+
+                      <a class="btn btn-primary btn-lg" href="http://atknin.ru/forbidden/">
+                        <span class="glyphicon glyphicon-ban-circle pull-left" style="font-size:xx-large;margin:5px;"></span> 
+                          FBD REF<br>
+                          <small> запр. отражение</small>
+                      </a>
+
+                       <a class="btn btn-primary btn-lg" href="http://atknin.ru/double_crystal/">
+                        <span class="glyphicon glyphicon-object-align-bottom pull-left" style="font-size:xx-large;margin:5px;"></span> 
+                          DCRYS RC<br>
+                          <small>rocking curve</small>
+                      </a>
+                      <p style="text-indent: 4em;">
+                      </p>
+
+                      <div>
+                      <a class="btn btn-info btn-lg" href="http://atknin.ru/theory/">
+                        <span class="glyphicon glyphicon-text-size" style="font-size:xx-large;margin:5px;"></span> 
+                          THR<br>
+                          <small>theory</small>
+                      </a>
+                    </div>
+                      <p style="text-indent: 4em;">
+                      </p>
+
+                     
+                      <a class="btn btn-danger btn-sm" href="http://atknin.ru/scedule/">
+                        <span class="glyphicon glyphicon-calendar" style="font-size:xx-large;margin:5px;"></span> 
+                          SCEDULE<br>
+                          <small>Конгресс расписание</small>
+                      </a>
+            
+                     
+
+
+                      <div>
+
+          
+                   {% endblock %}</div>
+        </div>
+
+       
+
+
+        <div class="row">
+          <div class="col-xs-8">
+              
+            {% block comments %}
+            {% endblock %}
+          </div>
+
+          <div class="col-xs-4">
+             {% block xz %}{% endblock %}
+          </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+  
+
+
+
+   
+<footer class="panel-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Contact us form -->
+                <div class="col-md-4">
+                    <div class="headline">
+                        <h3>CONTACT US</h3>
+                    </div>
+                    <hr />
+                    <div class="content">
+                        <p>
+                            Moscow, 119234<br />
+                            Leninskie Gory, 1<br />
+                            Phone: +7 915 132 24 37<br />
+                            Email: atknini@yahoo.com
+                        </p>
+                    </div>
+                </div>
+                <!-- Go social -->
+                <div class="col-md-4">
+                    <div class="headline">
+                        <h3>GO SOCIAL</h3>
+                    </div>
+                    <hr />
+                    <div class="content">
+                        <p>
+                            Get in toach with us:
+                        </p>
+                    </div>
+                </div>
+                <!-- Subscibe -->
+                <div class="col-md-4">
+                    <div class="headline">
+                        <h3>SUBSCRIBE</h3>
+                    </div>
+                    <hr />
+                    <div class="content">
+                        <p>
+                            Subscribe here:
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+  {% block last_one %}{% endblock %}
+
+</body>
+
+</html>

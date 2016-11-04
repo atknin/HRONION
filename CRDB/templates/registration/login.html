@@ -1,0 +1,71 @@
+{% extends 'CRDB/index.html' %}
+  	{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block web_title %}[forbidden]{% endblock %}
+
+{% block extra %}{% endblock %}
+
+
+{% block name_of %}
+		LOGIN
+{% endblock %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+<link href="{% static "CRDB/css/login.css" %}" rel="stylesheet">
+	<div class="login-page">
+  <div class="form">
+    <form class="register-form" >
+      <input type="text"  id="id_username" placeholder="name"/>
+      <input type="password"  id="id_password"  placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" method="post" action="{% url 'login' %}">
+    	{% csrf_token %}
+      <input type="text" id="id_username"  name="username"  placeholder="username"/>
+      <input type="password" id="id_password" name="password"  placeholder="password"/>
+      <button type="submit">login</button>
+      <p class="message">Not registered? <a href="{% url 'password_reset' %}">Lost password?</a></p>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block comments %}
+
+{% endblock %}
+

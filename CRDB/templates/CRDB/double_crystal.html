@@ -1,0 +1,241 @@
+{% extends 'CRDB/index.html' %}
+{% block extra_head %}
+
+{% endblock %}
+
+{% block web_title %}[double crystal]{% endblock %}
+
+{% block extra %}{% endblock %}
+
+
+
+
+{% block content %}
+			<div class ="col-md-6 form-group ">	<img src="http://atknin.ru/media/double_scheme.png"  height="170" /></a></div>
+			<div class ="col-md-6 form-group ">
+				<div style="height:30px;overflow:hidden;margin-right:15px;">
+				   <table class="table">
+				       <thead>
+				           <tr>
+				                <th>OK</th>
+				                <th>Предложения в разроботку приложения</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            <tr>
+				              <td>NEW</td>
+				                <td>
+				                	<form action="/add_suggest/{{projects.id}}/" method="post" role="suggest_form" class="clearfix">
+				                		{% csrf_token %}
+				                	<input id="id_text" maxlength="300" name="text" type="text" cols="40"  class="form-control" rows="1" placeholder="Your Suggest!">
+				                <td>
+				                	<button type="submit" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+				                	</form>
+				                </td>
+				            </tr>
+				            <tr>
+				                <td>Cel 2,1</td>
+				                <td>Cel 2,2</td>
+				            </tr>
+				            <tr>
+				                <td>Cel 3,1</td>
+				                <td>Cel 3,2</td>
+				            </tr>
+
+
+				        </tbody>
+				    </table>
+				</div>
+
+
+				<div style="height:200px;overflow-y:scroll;;">
+				    <table class="table">
+				        <thead>
+
+				        </thead>
+				        <tr>	
+				        			
+				                <td>NEW</td>
+				                <td>
+				                	<form action="/add_suggest/{{projects.id}}/" method="post" role="suggest_form" class="clearfix">
+				                		{% csrf_token %}
+				                	<input id="id_text" maxlength="300" name="text" type="text" cols="40"  class="form-control" rows="1" placeholder="Your Suggest!">
+				                <td>
+				                	<button type="submit" class="btn btn-info btn-circle"><i class="glyphicon glyphicon-ok"></i></button>
+				                	</form>
+				                </td>
+				                
+				            </tr>
+
+				        <tbody>
+				        	{% for suggests in suggestions %}
+				            <tr>
+				                <td>{{suggests.executed}}</td>
+				                <td>{{suggests.text}}</td>
+				            </tr>
+				            {%endfor%}
+				             <tr style="color:white">
+				                <th>Col 1</th>
+				                <th>Col 2</th>
+				            </tr>
+				        </tbody>
+				    </table>
+				</div>
+			</div>
+			<div class="col-md-4 form-group text-right">
+	            <button type="button" id = "get_kdo" class="btn btn-primary">Submit</button>
+	        </div>
+
+{% endblock %}
+
+
+
+{% block name_of %}
+		<h1 class="page-header">[{{projects.project_name}}]</h1>
+{% endblock %}
+
+
+
+
+
+
+{% block comments %}
+	<div>
+	 
+	    <h4>Leave a comment</h4>
+	 
+	    
+	 		
+	    	<div class="col-md-6 form-group">
+	    	{% if user.is_authenticated %}
+	    		<div>
+					<h3><span class="label label-primary">> {{user.first_name}} {{user.last_name}}</span></h3>
+				</div>
+	    	{% else %}
+		    	<label class="sr-only" for="name">Name</label>
+		        <input id="comment_user"  name="user_name"  type="text" class="form-control" placeholder="Name">
+			{% endif %}
+	            
+	        </div>
+	        <div class="col-md-12 form-group">
+
+	            <tr><th><label for="comment_text">Comment:</label></th><td>
+	            	<textarea class="form-control" cols="40" id="comment_text"  placeholder="your comment" maxlength="3000" name="comment" rows="3"></textarea>    	            	
+	        </div>
+	 		<div id = 'proverka' class="col-md-8 form-group text-right"> 
+	 			проверка
+	 		</div>
+	        <div class="col-md-4 form-group text-right">
+	            <button type="button" id = "comment_but" class="btn btn-primary btn-xs">Submit</button>
+	        </div>
+
+	    
+	</div>
+
+<div class = "col-md-12 form-group">
+
+	    <blockquote>
+			 <p id = 'user_com'></p>
+			 <footer id = 'text_com'></footer>
+		</blockquote>
+
+   {% for post in comments %}	
+	    <blockquote>
+			 <p>{{post.name}} ({{post.submit_date}})</p>
+			 <footer>{{post.comment}}</footer>
+		</blockquote>
+	{% empty %}
+	<p>No comments here yet :(</p>
+	{% endfor %}
+
+<!--http://django-contrib-comments.readthedocs.org/en/latest/models.html-->
+</div>
+
+{% endblock %}
+
+
+
+
+ {% block last_one %}
+<script>
+	$('#like').click(function(){
+      $.ajax({
+               type: "POST",
+               url: "{% url 'like' %}",
+               data: {'slug': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+
+               success: function(response) {
+                      // alert(response.message);
+                      // alert('Company likes count is now ' + response.likes_count);
+                       $('#like_count').html(response.likes_count)
+                       $('#message').html(response.message)
+                },
+                error: function(rs, e) {
+                       alert(rs.responseText);
+                }
+          }); 
+    })
+
+
+</script>
+
+
+
+
+
+<script>
+	$('#comment_but').click(function(){
+      $.ajax({
+               type: "POST",
+               url: "/add_comment/{{projects.id}}/",
+                
+               data: {'comment_text': $( "#comment_text" ).val(),'comment_user': $( "#comment_user" ).val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+
+               success: function(response) {
+                      // alert(response.message);
+                      // alert('все хорошо');
+                       // $('#like_count').html(response.likes_count)
+                       $('#proverka').text('все хорошо')
+                   
+                       $('#text_com').text($( "#comment_text" ).val())
+                       $('#user_com').text('{{ user.first_name }} (Только что)')
+                },
+                error: function(rs, e) {
+                       $('#proverka').text('ошибка')
+                       alert(rs.responseText);
+                }
+          }); 
+    })
+</script>
+
+
+
+
+<script>
+	$('#get_kdo').click(function(){
+      $.ajax({
+               type: "POST",
+               url: "/double_crystal/",
+                
+               data: {'comment_text': $( "#comment_text" ).val(),'comment_user': $( "#comment_user" ).val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+               dataType: "json",
+
+               success: function(response) {
+                      // alert(response.message);
+                      // alert('все хорошо');
+                       // $('#like_count').html(response.likes_count)
+                       $('#proverka').text('все хорошо')
+                   
+                       $('#text_com').text($( "#comment_text" ).val())
+                       $('#user_com').text('{{ user.first_name }} (Только что)')
+                },
+                error: function(rs, e) {
+                       $('#proverka').text('ошибка')
+                       alert(rs.responseText);
+                }
+          }); 
+    })
+</script>
+{% endblock %}

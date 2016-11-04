@@ -1,0 +1,68 @@
+{% extends 'CRDB/index.html' %}
+
+{% block content %}
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>ID</th>
+		      <th>Name</th>
+		      <th>Created at</th>
+		      <th>Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for statya in articles %}
+		      <tr>
+		        <td>{{statya.id}}</td>
+		        <td>{{statya.title}}</td>
+		        <td>{{statya.published_at}}</td>
+		        <td>
+		          <a href="/article_detail/{{statya.id}}/"> <p>open</p>
+		        </td>
+		      </tr>
+		   {% endfor %}
+		  </tbody>
+		</table>
+		 	
+
+		 	
+
+
+			
+{% endblock %}
+
+{% block name_of %}
+		<h1 class="page-header">[ARTICLES]</h1>
+		<div id="pages" align="center">
+			<nav>
+			  <ul class="pagination">
+
+				  	{% if articles.has_previous %}
+					    <li>
+					      <a href="?page={{ articles.previous_page_number }}" aria-label="Previous">
+					      <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+				    {% endif %}
+
+				    <li>
+				    	<a href="#">Page {{ articles.number }} of {{ articles.paginator.num_pages }}.</a>
+					</li>
+
+					{% if articles.has_next %}
+					    <li>
+					      <a href="?page={{ articles.next_page_number }}" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+				    {% endif %}
+			  </ul>
+			</nav>
+		</div>	
+
+
+
+		
+		
+		
+{% endblock %}

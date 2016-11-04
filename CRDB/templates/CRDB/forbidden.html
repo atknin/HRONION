@@ -1,0 +1,85 @@
+{% extends 'CRDB/index.html' %}
+{% block extra_head %}
+
+{% endblock %}
+
+{% block web_title %}[forbidden]{% endblock %}
+
+{% block extra %}{% endblock %}
+
+
+{% block name_of %}
+		<h1 class="page-header">[{{projects.project_name}}]</h1>
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block comments %}
+	<div>
+	 
+	    <h4>Leave a comment</h4>
+	 
+	    <form action="/add_comment/{{projects.id}}/" method="post" role="form" class="clearfix">{% csrf_token %}
+	 		
+	    	<div class="col-md-6 form-group">
+	            <label class="sr-only" for="name">Name</label>
+	            <input id="id_user_name"  name="user_name"  type="text" class="form-control" placeholder="Name">
+	        </div>
+	        <div class="col-md-12 form-group">
+
+	            <tr><th><label for="id_comment">Comment:</label></th><td>
+	            	<textarea class="form-control" cols="40" id="id_comment"  placeholder="your comment" maxlength="3000" name="comment" rows="3"></textarea>    	            	
+	        </div>
+	 
+	        <div class="col-md-12 form-group text-right">
+	        	
+	            <button type="submit" class="btn btn-primary">Submit</button>
+	        </div>
+
+	    </form>
+	</div>
+
+
+
+   {% for post in comments %}	
+	    <blockquote>
+			 <p>{{post.name}} ({{post.submit_date}})</p>
+			 <footer>{{post.comment}}</footer>
+		</blockquote>
+	{% empty %}
+	<p>No comments here yet :(</p>
+	{% endfor %}
+
+<!--http://django-contrib-comments.readthedocs.org/en/latest/models.html-->
+{% endblock %}
+
+
+ {% block last_one %}
+   <script>
+  var button = document.getElementById('button'),
+      xmlhttp = new XMLHttpRequest();
+  button.addEventListener('click', function() {
+   var name = document.getElementById('name').value.replace(/<[^>]+>/g,''),
+       comment = document.getElementById('comment').value.replace(/<[^>]+>/g,'');
+   if(name === '' || comment === '') {
+    alert('Заполните все поля!');
+    return false;
+   }
+   xmlhttp.open('post', '/add_comment/{{projects.id}}/', true);
+   xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   xmlhttp.send("name=" + encodeURIComponent(name) + "&comment=" + encodeURIComponent(comment));
+  });
+</script>
+{% endblock %}

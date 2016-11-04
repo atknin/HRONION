@@ -1,0 +1,45 @@
+{% extends 'CRDB/chem_base.html' %}
+
+
+{% block content %}
+	<script type="text/javascript">
+		
+		timeend= new Date(2016, 4, 2, 19, 45);
+		// для задания обратного отсчета до определенной даты укажите дату в формате:
+		// timeend= new Date(ГОД, МЕСЯЦ-1, ДЕНЬ);
+		// Для задания даты с точностью до времени укажите дату в формате:
+		// timeend= new Date(ГОД, МЕСЯЦ-1, ДЕНЬ, ЧАСЫ-1, МИНУТЫ);
+		function time() {
+		    today = new Date();
+		    today = Math.floor((timeend-today)/1000);
+		    tsec=today%60; today=Math.floor(today/60); if(tsec<10)tsec='0'+tsec;
+		    tmin=today%60; today=Math.floor(today/60); if(tmin<10)tmin='0'+tmin;
+		    thour=today%24; today=Math.floor(today/24);
+		    timestr=today +" дней "+ thour+" часов "+tmin+" минут "+tsec+" секунд";
+		    document.getElementById('t').innerHTML=timestr;
+		    window.setTimeout("time()",1000);
+		}
+	</script>
+	
+	<body onload="time()">
+		<nav>
+		  <ul class="pagination">
+		    <li>
+		      <a href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    <li><a href="#"><span id="t" style="font-size:15px"></span></a></li>
+		    <li>
+		      <a href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+
+			
+
+
+
+{% endblock %}
